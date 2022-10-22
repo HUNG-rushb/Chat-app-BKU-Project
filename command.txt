@@ -1,4 +1,0 @@
- // "start": "serverless offline",
-    // "prisma_gen": "prisma generate --schema=./src/prisma/schema.prisma",
-    // "prisma_db_push": "prisma db push --schema=./src/prisma/schema.prisma",
-    // "dev": "nodemon --exec \"serverless offline start\""
