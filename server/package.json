@@ -1,24 +1,31 @@
 {
-  "name": "server",
+  "name": "images-social-server-chat",
   "version": "1.0.0",
-  "description": "",
+  "description": "Đề Cương Luận Văn BKU 2022",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "serverless offline",
+    "prisma_gen": "prisma generate --schema=./src/prisma/schema.prisma",
+    "prisma_db_push": "prisma db push --schema=./src/prisma/schema.prisma",
+    "dev": "nodemon --exec \"serverless offline start\""
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HUNG-rushb/Chat-app-BKU-Project.git"
+  },
+  "author": "ĐH Bách Khoa TPHCM",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.1",
-    "cors": "^2.8.5",
-    "crypto": "^1.0.1",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "getstream": "^7.2.10",
-    "nodemon": "^2.0.12",
-    "stream-chat": "^4.1.0",
-    "twilio": "^3.67.1"
+    "@prisma/client": "^4.4.0",
+    "apollo-server-lambda": "^3.10.3",
+    "dotenv": "^16.0.3",
+    "graphql": "^16.6.0",
+    "mongoose": "^6.5.3",
+    "prisma": "^4.4.0"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.1231.0",
+    "nodemon": "^1.19.4",
+    "serverless-offline": "^11.1.1"
   }
 }

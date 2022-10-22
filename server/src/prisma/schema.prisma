@@ -1,0 +1,59 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["mongodb"]
+}
+
+// https://www.prisma.io/docs/concepts/components/prisma-schema/data-model
+// https://www.prisma.io/docs/concepts/components/prisma-schema/relations
+
+model User {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  email String  @unique
+  name  String
+  age   Int  @default(18)
+  posts Post[]
+  createdAt DateTime  @default(now())
+  
+}
+model Post {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  title  String
+  content   String?
+  author    User @relation(fields: [authorId], references: [id])
+  authorId  String   @db.ObjectId
+  createdAt DateTime  @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// model Comment {
+//   id    String @id @default(auto()) @map("_id") @db.ObjectId
+//   // email String  @unique
+//   content   String?
+//   name  String
+//   createdAt DateTime  @default(now())
+// }
+
+
+// model User {
+//   id    String  @id @default(auto()) @map("_id") @db.ObjectId
+//   email String  @unique
+//   name  String?
+//   posts Post[]
+// }
+
+// model Post {
+//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   title     String
+//   content   String?
+//   published Boolean  @default(false)
+//   viewCount Int      @default(0)
+//   author    User     @relation(fields: [authorId], references: [id])
+//   authorId  String   @db.ObjectId
+// }

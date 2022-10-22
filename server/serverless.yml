@@ -1,0 +1,21 @@
+org: duyhung
+app: bku-project
+service: bku-project-chat-app-api
+plugins:
+  - serverless-offline
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: ap-southeast-1
+functions:
+  graphql:
+    # this is formatted as <FILENAME>.<HANDLER>
+    handler: src/index.graphqlHandler
+    events:
+      - http:
+          path: /
+          method: any
+          cors: true
+custom:
+  serverless-offline:
+    httpPort: 2611
