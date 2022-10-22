@@ -207,7 +207,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/bku-project-chat-app-api/dev/1666442405010-2022-10-22T12:40:05.010Z/bku-project-chat-app-api.zip"
+          "S3Key": "serverless/bku-project-chat-app-api/dev/1666446568086-2022-10-22T13:49:28.086Z/bku-project-chat-app-api.zip"
         },
         "Handler": "s_graphql.handler",
         "Runtime": "nodejs14.x",
@@ -225,14 +225,14 @@
         "GraphqlLogGroup"
       ]
     },
-    "GraphqlLambdaVersion6nwVG57BzYMlaaITEdCVSF88q5H1IfZzE0BSnKf9o7A": {
+    "GraphqlLambdaVersionB6Ef2mmyWzI71vEyICRncK3F9rwu038oKDLZl6qM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GraphqlLambdaFunction"
         },
-        "CodeSha256": "xI+N3FutpqSVtYa2DUU9YaYB/swU4oeXPtlWTmawVUU="
+        "CodeSha256": "bQj289HtLkvGfYw0py4Z/sXvTh+qcw7+ehbBiM4WaVk="
       }
     },
     "ApiGatewayRestApi": {
@@ -344,7 +344,7 @@
         "GraphqlLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1666442379333": {
+    "ApiGatewayDeployment1666446540391": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -503,7 +503,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/bku-project-chat-app-api/dev/1666442405010-2022-10-22T12:40:05.010Z/custom-resources.zip"
+          "S3Key": "serverless/bku-project-chat-app-api/dev/1666446568086-2022-10-22T13:49:28.086Z/custom-resources.zip"
         },
         "FunctionName": "bku-project-chat-app-api-dev-custom-resource-apigw-cw-role",
         "Handler": "api-gateway-cloud-watch-role/handler.handler",
@@ -565,7 +565,7 @@
     "GraphqlLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GraphqlLambdaVersion6nwVG57BzYMlaaITEdCVSF88q5H1IfZzE0BSnKf9o7A"
+        "Ref": "GraphqlLambdaVersionB6Ef2mmyWzI71vEyICRncK3F9rwu038oKDLZl6qM"
       },
       "Export": {
         "Name": "sls-bku-project-chat-app-api-dev-GraphqlLambdaFunctionQualifiedArn"
