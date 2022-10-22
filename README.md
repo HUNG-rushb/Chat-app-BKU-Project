@@ -4,6 +4,6 @@ API
 
 https://oq6smgcs39.execute-api.ap-southeast-1.amazonaws.com/dev/
 
-APP
+CHAT APP
 
-https://main.d82t6x9f58tba.amplifyapp.com/
+https://main.d1tavnpfnfnpjs.amplifyapp.com/
