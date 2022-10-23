@@ -19,6 +19,6 @@ functions:
 custom:
   serverless-offline:
     httpPort: 2611
-package:
-  exclude:
-    - node_modules/**
+# package:
+#   exclude:
+#     - node_modules/**

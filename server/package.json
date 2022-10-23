@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Đề Cương Luận Văn BKU 2022",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "serverless offline",
     "prisma_gen": "prisma generate --schema=./src/prisma/schema.prisma",
@@ -16,6 +17,7 @@
   "author": "ĐH Bách Khoa TPHCM",
   "license": "ISC",
   "dependencies": {
+    "@apollo/server": "^4.0.2",
     "@prisma/client": "^4.4.0",
     "apollo-server-lambda": "^3.10.3",
     "dotenv": "^16.0.3",
