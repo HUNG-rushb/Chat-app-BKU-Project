@@ -1,12 +1,11 @@
 const userQuery = {
-  users(parent, args, { prisma }, info) {
-    // if (!args.query) {
-    //   return db.users;
-    // }
-    // return db.users.filter((user) => {
-    //   return user.name.toLowerCase().includes(args.query.toLowerCase());
-    // });
+  // user(parent, args, { prisma }, info) {
+  //   return prisma.user.findMany();
+  // },
+  allUsers: async (parent, args, { prisma }, info) => {
+    const result = await prisma.user.findMany();
+    return result;
   },
 };
 
-module.exports = userQuery;
+export default userQuery;

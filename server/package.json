@@ -1,32 +1,32 @@
 {
-  "name": "images-social-server-chat",
-  "version": "1.0.0",
-  "description": "Đề Cương Luận Văn BKU 2022",
-  "main": "index.js",
-  "scripts": {
-    "start": "serverless offline",
-    "prisma_gen": "prisma generate --schema=./src/prisma/schema.prisma",
-    "prisma_db_push": "prisma db push --schema=./src/prisma/schema.prisma",
-    "dev": "nodemon --exec \"serverless offline start\""
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/HUNG-rushb/Chat-app-BKU-Project.git"
-  },
-  "author": "ĐH Bách Khoa TPHCM",
-  "license": "ISC",
-  "dependencies": {
-    "@apollo/server": "^4.0.2",
-    "@prisma/client": "^4.4.0",
-    "apollo-server-lambda": "^3.10.3",
-    "dotenv": "^16.0.3",
-    "graphql": "^16.6.0",
-    "mongoose": "^6.5.3",
-    "prisma": "^4.4.0"
-  },
-  "devDependencies": {
-    "aws-sdk": "^2.1231.0",
-    "nodemon": "^1.19.4",
-    "serverless-offline": "^11.1.1"
-  }
+      "name": "images-social-server",
+      "version": "1.0.0",
+      "description": "Đề Cương Luận Văn BKU 2022",
+      "main": "index.js",
+      "type": "module",
+      "scripts": {
+            "prisma_gen": "prisma generate --schema=./src/prisma/schema.prisma",
+            "prisma_db_push": "prisma db push --schema=./src/prisma/schema.prisma",
+            "dev": "nodemon src/index"
+      },
+      "repository": {
+            "type": "git",
+            "url": "git+https://github.com/HUNG-rushb/Images-Social-Server.git"
+      },
+      "author": "ĐH Bách Khoa TPHCM",
+      "license": "ISC",
+      "bugs": {
+            "url": "https://github.com/HUNG-rushb/Images-Social-Server/issues"
+      },
+      "homepage": "https://github.com/HUNG-rushb/Images-Social-Server#readme",
+      "dependencies": {
+            "@prisma/client": "^4.4.0",
+            "apollo-server": "^3.10.3",
+            "dotenv": "^16.0.3",
+            "graphql": "^16.6.0",
+            "graphql-tag": "^2.12.6"
+      },
+      "devDependencies": {
+            "nodemon": "^1.19.4"
+      }
 }

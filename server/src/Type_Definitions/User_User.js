@@ -1,36 +1,38 @@
-const { gql } = require('apollo-server-lambda');
+import gql from 'graphql-tag';
 
 const userDefs = gql`
   extend type Query {
-    users(query: String): [User!]!
+    # user(query: String): [User!]!
+    allUsers: [User!]!
   }
 
   extend type Mutation {
-    createUser(data: CreateUserInput!): User!
-    deleteUser(id: ID!): User!
-    updateUser(id: ID!, data: UpdateUserInput!): User!
+    createUser: User!
+    # createUser(data: CreateUserInput!): User!
+    # deleteUser(id: ID!): User!
+    # updateUser(id: ID!, data: UpdateUserInput!): User!
   }
 
-  input CreateUserInput {
-    name: String!
-    email: String!
-    age: Int
-  }
+  # input CreateUserInput {
+  #   name: String!
+  #   # email: String!
+  #   # age: Int
+  # }
 
-  input UpdateUserInput {
-    name: String
-    email: String
-    age: Int
-  }
+  # input UpdateUserInput {
+  #   name: String
+  #   email: String
+  #   age: Int
+  # }
 
   type User {
     id: ID!
-    email: String!
+    # email: String!
     name: String!
-    age: Int
-    posts: [Post!]!
+    # age: Int
+    # posts: [Post!]!
     # comments: [Comment!]!
   }
 `;
 
-module.exports = userDefs;
+export default userDefs;

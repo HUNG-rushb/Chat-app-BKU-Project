@@ -1,15 +1,16 @@
 const userMutation = {
-  async createUser(parent, args, { prisma }, info) {
-    await prisma.user.create({
+  createUser: async (parent, args, { prisma }, info) => {
+    // console.log(prisma);
+
+    const result = await prisma.user.create({
       data: {
         name: 'Hung',
       },
     });
 
-    // const allUsers = await prisma.user.findMany();
+    return result;
 
-    // console.dirlog(allUsers, { depth: null });
-    // console.dir(allUsers, { depth: null });
+    // const allUsers = await prisma.user.findMany();
   },
   // deleteUser(parent, args, { db }, info) {
   //   const userIndex = db.users.findIndex((user) => user.id === args.id);
@@ -63,4 +64,4 @@ const userMutation = {
   // },
 };
 
-module.exports = userMutation;
+export default userMutation;

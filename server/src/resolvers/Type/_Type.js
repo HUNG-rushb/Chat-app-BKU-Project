@@ -1,11 +1,11 @@
-const User = require('./User___.js');
-const Post = require('./Post___.js');
+import User from './User___.js';
+// import Post from './Post___.js';
 // const Comment = require('./Comment___.js');
 
 const Type = {
   User,
-  Post,
+  // Post,
   // Comment,
 };
 
-module.exports = Type;
+export default Type;
