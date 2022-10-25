@@ -1,15 +1,12 @@
-const userQuery = require("./USER.js");
-const postQuery = require("./POST.js");
-// const commentQuery = require('./COMMENT.js');
+import userQuery from './USER.js';
 
 const Query = {
-  ok: () => "OK",
   // User
   ...userQuery,
   // Post
-  ...postQuery,
+  // ...postQuery,
   // Comment
   // ...commentQuery,
 };
 
-module.exports = Query;
+export default Query;
