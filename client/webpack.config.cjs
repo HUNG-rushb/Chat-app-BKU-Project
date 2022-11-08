@@ -1,7 +1,3 @@
-// https://dev.to/bitovi/how-to-build-a-micro-frontend-with-webpacks-module-federation-plugin-n41
-// https://stackoverflow.com/questions/32070303/uncaught-referenceerror-react-is-not-defined
-// https://stackoverflow.com/questions/50824024/urierror-failed-to-decode-param-public-url-favicon-ico
-
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
