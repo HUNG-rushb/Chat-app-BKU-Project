@@ -23,6 +23,13 @@ module.exports = {
     historyApiFallback: true,
   },
   plugins: [
+    new ModuleFederationPlugin({
+      name: 'chat',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './ChatApp': './src/components/ChatApp/ChatApp.jsx',
+      },
+    }),
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       favicon: './public/favicon.ico',

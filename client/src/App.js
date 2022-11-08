@@ -1,7 +1,9 @@
+import ChatApp from './components/ChatApp/ChatApp.jsx';
+
 const App = () => {
   return (
     <div>
-      <p>Chat App Here</p>
+      <ChatApp />
     </div>
   );
 };
