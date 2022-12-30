@@ -1,37 +1,60 @@
 {
-  "name": "chat-app-client",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@apollo/client": "^3.7.0",
-    "apollo-client": "^2.6.10",
-    "graphql": "^15.8.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+      "name": "chat-app-client",
+      "version": "0.1.0",
+      "private": true,
+      "dependencies": {
+            "@apollo/client": "^3.7.0",
+            "apollo-client": "^2.6.10",
+            "bootstrap": "^5.2.2",
+            "graphql": "^15.8.0",
+            "history": "^5.3.0",
+            "react": "^18.2.0",
+            "react-bootstrap": "^2.5.0",
+            "react-dom": "^18.2.0",
+            "react-scripts": "5.0.1"
+      },
+      "devDependencies": {
+            "@babel/core": "^7.20.2",
+            "@babel/polyfill": "^7.12.1",
+            "@babel/preset-env": "^7.20.2",
+            "@babel/preset-react": "^7.18.6",
+            "autoprefixer": "^10.4.2",
+            "babel-loader": "^8.2.3",
+            "css-loader": "^6.6.0",
+            "html-webpack-plugin": "^4.5.0",
+            "mini-css-extract-plugin": "^2.5.3",
+            "nodemon": "^2.0.20",
+            "postcss-loader": "^6.2.1",
+            "sass": "^1.49.9",
+            "sass-loader": "^12.6.0",
+            "style-loader": "^3.3.1",
+            "webpack": "^5.70.0",
+            "webpack-cli": "^4.9.2",
+            "webpack-dev-server": "^4.7.4"
+      },
+      "scripts": {
+            "start": "react-scripts start",
+            "build": "webpack",
+            "eject": "react-scripts eject",
+            "webpack_build": "webpack build --config webpack.config.cjs --stats-children",
+            "serve": "webpack serve --config webpack.config.cjs"
+      },
+      "eslintConfig": {
+            "extends": [
+                  "react-app",
+                  "react-app/jest"
+            ]
+      },
+      "browserslist": {
+            "production": [
+                  ">0.2%",
+                  "not dead",
+                  "not op_mini all"
+            ],
+            "development": [
+                  "last 1 chrome version",
+                  "last 1 firefox version",
+                  "last 1 safari version"
+            ]
+      }
 }
