@@ -7,34 +7,64 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator erd {
+  provider                  = "prisma-erd-generator"
+  output                    = "ERD.svg"
+  theme                     = "forest"
+  includeRelationFromFields = true
+}
+
 // https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/mongodb/install-prisma-client-typescript-mongodb
 // https://www.prisma.io/docs/concepts/components/prisma-schema/data-model
 // https://www.prisma.io/docs/concepts/components/prisma-schema/relations
 
 model User {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  // email String  @unique
-  name  String
-  // age   Int  @default(18)
-  // posts Post[]
-  // createdAt DateTime  @default(now())
-  
-}
-// model Post {
-//   id    String @id @default(auto()) @map("_id") @db.ObjectId
-//   title  String
-//   content   String?
-//   author    User @relation(fields: [authorId], references: [id])
-//   authorId  String   @db.ObjectId
-//   createdAt DateTime  @default(now())
-//   updatedAt DateTime @updatedAt
-// }
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  email           String   @unique
+  name            String
+  profileImageURL String
+  age             Int      @default(18)
+  createdAt       DateTime @default(now())
+  groupIDs        String[] @db.ObjectId
 
-// model Comment {
-//   id    String @id @default(auto()) @map("_id") @db.ObjectId
-//   // email String  @unique
-//   content   String?
-//   name  String
-//   createdAt DateTime  @default(now())
-// }
+  level    Level?
+  posts    Post[]
+  comments Comment[]
+  groups    Group[]   @relation(fields: [groupIDs], references: [id])
+  followers Follower?
+  followings Following?
+}
+
+model Follower {
+ id        String   @id @default(auto()) @map("_id") @db.ObjectId
+ userFollower String[] @db.ObjectId
+  userId String @unique @db.ObjectId
+
+  follower_to_user User @relation(fields: [userId], references: [id])
+}
+
+model Following {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userFollowing String[] @db.ObjectId
+  userId String @unique @db.ObjectId
+
+  following_to_user User @relation(fiex`lds: [userId], references: [id])
+}
+
+model Group {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  name    String
+  userIDs String[] @db.ObjectId
+
+  users User[] @relation(fields: [userIDs], references: [id])
+}
+
+model Level {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  currentXP    Int
+  currentLevel Int
+
+  userID        String @unique @db.ObjectId
+  level_to_user User   @relation(fields: [userID], references: [id])
+}
 

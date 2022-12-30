@@ -3166,7 +3166,18 @@ eval("__webpack_require__(/*! ../modules/web.timers */ \"./node_modules/@babel/p
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ \"./node_modules/react/jsx-runtime.js\");\n\nconst App = () => {\n  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"div\", {\n    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"p\", {\n      children: \"Chat App Here\"\n    })\n  });\n};\n/* harmony default export */ __webpack_exports__[\"default\"] = (App);\n\n//# sourceURL=webpack://chat-app-client/./src/App.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components_ChatApp_ChatApp_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/ChatApp/ChatApp.jsx */ \"./src/components/ChatApp/ChatApp.jsx\");\n/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ \"./node_modules/react/jsx-runtime.js\");\n\n\nconst App = () => {\n  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"div\", {\n    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_components_ChatApp_ChatApp_jsx__WEBPACK_IMPORTED_MODULE_0__[\"default\"], {})\n  });\n};\n/* harmony default export */ __webpack_exports__[\"default\"] = (App);\n\n//# sourceURL=webpack://chat-app-client/./src/App.js?");
+
+/***/ }),
+
+/***/ "./src/components/ChatApp/ChatApp.jsx":
+/*!********************************************!*\
+  !*** ./src/components/ChatApp/ChatApp.jsx ***!
+  \********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ \"./node_modules/react/jsx-runtime.js\");\n\n\nconst ChatApp = () => {\n  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {\n    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"div\", {\n      children: \"ChatApp\"\n    })\n  });\n};\n/* harmony default export */ __webpack_exports__[\"default\"] = (ChatApp);\n\n//# sourceURL=webpack://chat-app-client/./src/components/ChatApp/ChatApp.jsx?");
 
 /***/ }),
 
