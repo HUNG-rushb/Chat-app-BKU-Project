@@ -21,42 +21,80 @@ generator erd {
 model User {
   id              String   @id @default(auto()) @map("_id") @db.ObjectId
   email           String   @unique
+  phoneNumber     String
+  hashPassword    String
   name            String
   profileImageURL String
   age             Int      @default(18)
+  birthday        String
   createdAt       DateTime @default(now())
-  groupIDs        String[] @db.ObjectId
+  updatedAt       DateTime @updatedAt
 
-  level    Level?
-  posts    Post[]
-  comments Comment[]
-  groups    Group[]   @relation(fields: [groupIDs], references: [id])
-  followers Follower?
-  followings Following?
+  sessions      Session[]
+  level         Level?
+  posts         Post[]
+  comments      Comment[]
+  replyComments ReplyComment[]
+  followers     Follower?
+  followings    Following?
+  messages      Message[]
+  courses       Course[]
+  notifications Notification[]
+
+  reportIDs      String[] @db.ObjectId
+  user_to_report Report[] @relation(fields: [reportIDs], references: [id])
+
+  chatIDs      String[] @db.ObjectId
+  user_to_chat Chat[]   @relation(fields: [chatIDs], references: [id])
+}
+
+model Admin {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+}
+
+model Notification {
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  content String
+  isRead  Boolean
+
+  userId               String @db.ObjectId
+  notification_to_user User   @relation(fields: [userId], references: [id])
+}
+
+model Report {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  reason String
+
+  userIDs        String[] @db.ObjectId
+  report_to_user User[]   @relation(fields: [userIDs], references: [id])
+
+
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  createdAt    DateTime @default(now())
+  expires      DateTime
+
+  userId          String @db.ObjectId
+  session_to_user User   @relation(fields: [userId], references: [id])
 }
 
 model Follower {
- id        String   @id @default(auto()) @map("_id") @db.ObjectId
- userFollower String[] @db.ObjectId
-  userId String @unique @db.ObjectId
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  userFollower String[] @db.ObjectId
+  userId       String   @unique @db.ObjectId
 
   follower_to_user User @relation(fields: [userId], references: [id])
 }
 
 model Following {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
   userFollowing String[] @db.ObjectId
-  userId String @unique @db.ObjectId
 
-  following_to_user User @relation(fiex`lds: [userId], references: [id])
-}
-
-model Group {
-  id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  name    String
-  userIDs String[] @db.ObjectId
-
-  users User[] @relation(fields: [userIDs], references: [id])
+  userId            String @unique @db.ObjectId
+  following_to_user User   @relation(fields: [userId], references: [id])
 }
 
 model Level {
@@ -68,3 +106,121 @@ model Level {
   level_to_user User   @relation(fields: [userID], references: [id])
 }
 
+// model Camera {
+//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+// }
+
+model Image {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  url       String
+  hash      String
+  createdAt DateTime @default(now())
+
+  postId        String @unique @db.ObjectId
+  image_to_post Post   @relation(fields: [postId], references: [id])
+
+  tagIDs       String[] @db.ObjectId
+  image_to_tag Tag[]    @relation(fields: [tagIDs], references: [id])
+
+  imageInfoId ImageInfo?
+}
+
+model ImageInfo {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  camera       String
+  lens         String
+  aperture     String
+  focalLength  String
+  shutterSpeed String
+  ISO          String
+
+  imageId            String @unique @db.ObjectId
+  imageInfo_to_image Image  @relation(fields: [imageId], references: [id])
+}
+
+model Tag {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+
+  imageIDs     String[] @db.ObjectId
+  tag_to_image Image[]  @relation(fields: [imageIDs], references: [id])
+}
+
+model Post {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  points    Int
+  content   String[]
+  images    Image[]
+  cmts      Comment[]
+
+  userId       String @db.ObjectId
+  post_to_user User   @relation(fields: [userId], references: [id])
+}
+
+model Comment {
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  content       String?
+  createdAt     DateTime       @default(now())
+  replyComments ReplyComment[]
+
+  userId      String @db.ObjectId
+  cmt_to_user User   @relation(fields: [userId], references: [id])
+
+  postId      String @db.ObjectId
+  cmt_to_post Post   @relation(fields: [postId], references: [id])
+}
+
+model ReplyComment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String?
+  createdAt DateTime @default(now())
+
+  userId        String @db.ObjectId
+  reply_to_user User   @relation(fields: [userId], references: [id])
+
+  commentId    String  @db.ObjectId
+  reply_to_cmt Comment @relation(fields: [commentId], references: [id])
+}
+
+model Course {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  lessons Lesson[]
+
+  userId         String @db.ObjectId
+  course_to_user User   @relation(fields: [userId], references: [id])
+}
+
+model Lesson {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  content String
+
+  courseId         String @db.ObjectId
+  lesson_to_course Course @relation(fields: [courseId], references: [id])
+}
+
+// Chat Application
+model Message {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String?
+  createdAt DateTime @default(now())
+  isImage   Boolean
+
+  userId          String @db.ObjectId
+  message_to_user User   @relation(fields: [userId], references: [id])
+
+  chatId          String @db.ObjectId
+  message_to_chat Chat   @relation(fields: [chatId], references: [id])
+}
+
+model Chat {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+
+  messages Message[]
+
+  userIDs      String[] @db.ObjectId
+  chat_to_user User[]   @relation(fields: [userIDs], references: [id])
+}
