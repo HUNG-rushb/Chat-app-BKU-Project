@@ -2,6 +2,7 @@
       "name": "chat-app-client",
       "version": "0.1.0",
       "private": true,
+      "main": "src/index.js",
       "dependencies": {
             "@apollo/client": "^3.7.0",
             "apollo-client": "^2.6.10",
