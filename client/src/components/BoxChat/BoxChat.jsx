@@ -2,22 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import BoxChatHeader from './BoxChatHeader.jsx';
 import Messages from '../Messages/Messages.jsx';
+import './BoxChat.css'
 
-const Wrapper = styled.div`
-  border: 2px solid gray;
-  border-radius: 5px;
-  background-color: red;
-`;
+const BoxChat = ({item}) => {
 
-const BoxChat = () => {
   return (
-    <Wrapper>
-      <BoxChatHeader />
-
+    <div className='box-chat'>
+      <BoxChatHeader userCardDetail={item} />
       <div>
-        <Messages />
+        <Messages userCardDetail={item} />
       </div>
-    </Wrapper>
+    </div>
   );
 };
 

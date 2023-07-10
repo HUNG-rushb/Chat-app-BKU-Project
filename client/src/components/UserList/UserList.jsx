@@ -4,25 +4,21 @@ import UserListHeader from './UserListHeader.jsx';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  /* width: 75%; */
-  margin: 5vh 2.5vw 0 2.5vw;
-  min-height: 85vh;
+  background-color: #ffdab9;
 `;
 
-const UserList = () => {
+const UserList = ({ userListMessage, activeMessage, setActiveMessage }) => {
   return (
-    <>
+    <Wrapper>
       <UserListHeader />
-
-      <div>
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
+      <div className='userCardList'>
+        <UserCard
+          userListMessage={userListMessage}
+          activeMessage={activeMessage}
+          setActiveMessage={setActiveMessage}
+        />
       </div>
-    </>
+    </Wrapper>
   );
 };
 

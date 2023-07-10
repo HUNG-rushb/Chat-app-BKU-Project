@@ -1,0 +1,71 @@
+.user-list-header-container {
+    width: 100%;
+    background-color: #f8ad9d;
+    display: flex;
+}
+
+#user-list-header-avatar {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 10px;
+}
+
+.user-list-header-title {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+
+#chats-title {
+    font-size: 20px;
+}
+
+.user-card-container-inActive {
+    margin: 10px 0;
+    background-color: #ffdab9;
+    border-radius: 10px;
+    display: flex;
+    border: 2px solid #f8ad9d;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.user-card-container-active {
+    margin: 10px 0;
+    background-color: #f8ad9d;
+    border-radius: 10px;
+    display: flex;
+    border: 2px solid #ffdab9;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.user-card-container-inActive:hover{
+    background-color: #f8ad9d;
+}
+
+#user-cart-avatar {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 10px;
+}
+
+.name-and-time {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#user-card-name {
+    font-weight: 600;
+    font-size: 16px;
+}
+ 
+.userCardList {
+    height: 590px;
+    overflow-y: scroll;
+}
