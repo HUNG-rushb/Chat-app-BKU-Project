@@ -1,15 +1,17 @@
 .messages-container {
   margin-top: 10px;
-  height: 580px;
   padding: 10px;
-  overflow-y: scroll;
   border: 1px solid #ffdab9;
+  position: relative;
+  justify-content: space-between;
 }
 
 .message-content {
   display: flex;
   flex-direction: column;
-  height: 93%;
+  overflow-y: scroll ;
+  height: 510px;
+  margin-bottom: 10px;
 }
 
 .send-message-icon {
@@ -59,17 +61,8 @@
   display: flex;
   gap: 10px;
   align-items: center;
-}
-
-.input-message-text input {
-  width: 100%;
-  border-radius: 5px;
-  height: 35px;
-  border: 3px solid #f8ad9d;
-}
-
-.input-message-text input:focus {
-  outline: 1px solid #f8ad9d;
+  max-width: 1060px;
+  align-self: flex-end;
 }
 
 #content-edit {
