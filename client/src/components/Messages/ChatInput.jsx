@@ -4,7 +4,7 @@ import { CardImage } from 'react-bootstrap-icons';
 import ContentEditable from 'react-contenteditable';
 import { handleChangeFile } from '../../hooks/useChangeFile';
 
-const ChatInput = ({data, setData}) => {
+const ChatInput = ({data, setData, handleSendMessage}) => {
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [content, setContent] = useState('');
@@ -25,15 +25,15 @@ const ChatInput = ({data, setData}) => {
     }
   }, [content]);
 
-  const handleSendMessage = useCallback(() => {
-    const newMessage = {
-      userId: 1,
-      message: content
-    };
-    data.push(newMessage);
-    setData(data);
-    setContent('');
-  }, [data, setData, content]);
+  // const handleSendMessage = useCallback(() => {
+  //   const newMessage = {
+  //     userId: 1,
+  //     message: content
+  //   };
+  //   data.push(newMessage);
+  //   setData(data);
+  //   setContent('');
+  // }, [data, setData, content]);
   return (
     <div className="input-message-text">
       <div className="upload-image-input">
@@ -54,7 +54,7 @@ const ChatInput = ({data, setData}) => {
         id="content-edit"
       />
       <div className="send-message-icon" onClick={handleSendMessage}>
-        <Send size={25} onClick={handleSendMessage} />
+        <Send size={25} />
       </div>
     </div>
   );

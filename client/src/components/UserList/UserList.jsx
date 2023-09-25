@@ -7,13 +7,13 @@ const Wrapper = styled.div`
   background-color: #ffdab9;
 `;
 
-const UserList = ({ userListMessage, activeMessage, setActiveMessage }) => {
+const UserList = ({ messageData, activeMessage, setActiveMessage }) => {
   return (
     <Wrapper>
       <UserListHeader />
       <div className='userCardList'>
         <UserCard
-          userListMessage={userListMessage}
+          messageData={messageData}
           activeMessage={activeMessage}
           setActiveMessage={setActiveMessage}
         />

@@ -2,18 +2,18 @@ import React from 'react';
 import './BoxChat.css';
 import { Trash } from 'react-bootstrap-icons';
 
-const BoxChatHeader = ({userCardDetail}) => {
+const BoxChatHeader = ({messageData}) => {
   const handleDeleteMessage = () => {}
   return (
     <div className="box-chat-header-container">
       <div className="box-chat-header-left-content">
         <img
           id="box-chat-header-avatar"
-          src={userCardDetail?.image}
+          src={messageData?.image} 
           alt=""
         />
         <div className="box-chat-header-name-and-status">
-          <span id="box-chat-header-name">{userCardDetail?.name}</span>
+          <span id="box-chat-header-name">{messageData?.name}</span>
         </div>
       </div>
       <div className="box-chat-header-right-content" onClick={handleDeleteMessage}>

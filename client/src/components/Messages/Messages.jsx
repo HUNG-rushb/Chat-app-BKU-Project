@@ -4,9 +4,9 @@ import UserMessage from './UserMessage.jsx';
 import UserReverseMessage from './UserReverseMessage.jsx';
 import ChatInput from './ChatInput';
 
-const Messages = ({ userCardDetail }) => {
+const Messages = ({ messageData }) => {
   const scrollToBottomRef = useRef(null);
-  const [data, setData] = useState(userCardDetail.messages);
+  const [data, setData] = useState(messageData.messages);
 
   useEffect(() => {
     scrollToBottomRef.current.scrollTop = scrollToBottomRef.current.scrollHeight;

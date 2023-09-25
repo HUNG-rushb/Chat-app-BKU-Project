@@ -10,7 +10,7 @@ const BoxChat = ({item}) => {
     <div className='box-chat'>
       <BoxChatHeader userCardDetail={item} />
       <div>
-        <Messages userCardDetail={item} />
+        <Messages messageData={item} />
       </div>
     </div>
   );

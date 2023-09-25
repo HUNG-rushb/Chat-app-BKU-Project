@@ -2,13 +2,13 @@ import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import './UserList.css';
 
-const UserCard = ({ userListMessage, activeMessage, setActiveMessage }) => {
+const UserCard = ({ messageData, activeMessage, setActiveMessage }) => {
   const handleClickChooseMessage = useCallback((id) => {
     setActiveMessage(id);
   },[setActiveMessage]);
   return (
     <>
-      {userListMessage.map((item) => (
+      {messageData.map((item) => (
         <div
           className={
             item.id === activeMessage
