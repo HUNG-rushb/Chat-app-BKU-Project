@@ -1,11 +1,13 @@
-import UserList from '../UserList/UserList.jsx';
-import BoxChat from '../BoxChat/BoxChat.jsx';
+import UserList from '../components/UserList/UserList.jsx';
+import BoxChat from '../components/BoxChat/BoxChat.jsx';
 import styled from 'styled-components';
 import { Container, Row, Col } from 'react-bootstrap';
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 const ChatApp = ({ userId }) => {
   console.log(userId);
+
+  // const [activeMessage, setActiveMessage] = useState('');
 
   const [messageData, setMessageData] = useState([
     {
@@ -246,6 +248,7 @@ const ChatApp = ({ userId }) => {
           <StyledCol sm={3}>
             <UserList messageData={messageData} activeMessage={activeMessage} />
           </StyledCol>
+
           <StyledCol sm={9}>
             {messageData.map((item) => {
               if (item.id === activeMessage) {

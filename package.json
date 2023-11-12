@@ -8,6 +8,7 @@
             "bootstrap": "^5.2.2",
             "graphql": "^15.8.0",
             "history": "^5.3.0",
+            "lodash": "^4.17.21",
             "react": "^18.2.0",
             "react-bootstrap": "^2.5.0",
             "react-bootstrap-icons": "^1.10.3",
@@ -37,10 +38,10 @@
       },
       "scripts": {
             "start": "react-scripts start",
-            "build": "webpack",
             "eject": "react-scripts eject",
             "webpack_build": "webpack build --config webpack.config.cjs --stats-children",
-            "serve": "webpack serve --config webpack.config.cjs"
+            "serve": "webpack serve --mode development",
+            "build": "webpack --mode production"
       },
       "eslintConfig": {
             "extends": [
