@@ -10,7 +10,7 @@ const client = new ApolloClient({
     typePolicies: {
       Query: {
         fields: {
-          // getNewFeed: relayStylePagination(),
+          getChatMessage: relayStylePagination(),
         },
       },
     },

@@ -1,28 +1,51 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './Messages.css';
 import UserMessage from './UserMessage.jsx';
 import UserReverseMessage from './UserReverseMessage.jsx';
 import ChatInput from './ChatInput.jsx';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { useGetAllChatMessage } from '../../graphql/useMessage';
 
-const Messages = ({ messageData }) => {
-  const scrollToBottomRef = useRef(null);
-  const [data, setData] = useState(messageData.messages);
+const Messages = ({ chatId, currentUserId }) => {
+  const { messages, hasNextPage, isFetching, fetchError, loadNew, refetch } =
+    useGetAllChatMessage(chatId);
+  console.log(messages);
 
-  useEffect(() => {
-    scrollToBottomRef.current.scrollTop =
-      scrollToBottomRef.current.scrollHeight;
-  }, []);
+  // const scrollToBottomRef = useRef(null);
+
+  // useEffect(() => {
+  //   scrollToBottomRef.current.scrollTop =
+  //     scrollToBottomRef.current.scrollHeight;
+  // }, []);
 
   return (
     <div className="messages-container">
-      <div className="message-content" ref={scrollToBottomRef}>
-        {data.map((item, index) => {
-          if (item.userId === 1) {
-            return <UserMessage key={index} item={item} />;
-          } else return <UserReverseMessage key={index} item={item} />;
-        })}
+      {/* <div className="message-content" ref={scrollToBottomRef}> */}
+      <div className="message-content">
+        <InfiniteScroll
+          dataLength={messages.length}
+          next={() => {
+            loadNew();
+          }}
+          hasMore={hasNextPage}
+          loader={<h4>Loading...</h4>}
+          endMessage={
+            <p style={{ textAlign: 'center' }}>
+              <b>Begin</b>
+            </p>
+          }
+          inverse={true}
+        >
+          {messages.map((item) => {
+            if (item.node.userId === currentUserId) {
+              return <UserMessage key={item.node.id} item={item.node} />;
+            } else
+              return <UserReverseMessage key={item.node.id} item={item.node} />;
+          })}
+        </InfiniteScroll>
       </div>
-      <ChatInput data={data} setData={setData} />
+
+      <ChatInput />
     </div>
   );
 };

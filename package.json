@@ -14,6 +14,7 @@
             "react-bootstrap-icons": "^1.10.3",
             "react-contenteditable": "^3.3.7",
             "react-dom": "^18.2.0",
+            "react-infinite-scroll-component": "^6.1.0",
             "react-scripts": "5.0.1",
             "styled-components": "^5.3.8"
       },
@@ -37,7 +38,7 @@
             "webpack-dev-server": "^4.7.4"
       },
       "scripts": {
-            "start": "react-scripts start",
+            "start": "set PORT=3001&& react-scripts start",
             "eject": "react-scripts eject",
             "webpack_build": "webpack build --config webpack.config.cjs --stats-children",
             "serve": "webpack serve --mode development",

@@ -2,15 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import BoxChatHeader from './BoxChatHeader.jsx';
 import Messages from '../Messages/Messages.jsx';
-import './BoxChat.css'
+import './BoxChat.css';
 
-const BoxChat = ({item}) => {
-
+const BoxChat = ({ currentOtherUser, chatId, currentUserId }) => {
+  console.log({ currentOtherUser });
   return (
-    <div className='box-chat'>
-      <BoxChatHeader userCardDetail={item} />
+    <div className="box-chat">
+      <BoxChatHeader currentOtherUser={currentOtherUser.userIDs[0]} />
+
       <div>
-        <Messages messageData={item} />
+        <Messages chatId={chatId} currentUserId={currentUserId} />
       </div>
     </div>
   );

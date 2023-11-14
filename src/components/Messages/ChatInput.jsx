@@ -4,7 +4,7 @@ import { CardImage } from 'react-bootstrap-icons';
 import ContentEditable from 'react-contenteditable';
 import { handleChangeFile } from '../../hooks/useChangeFile';
 
-const ChatInput = ({data, setData, handleSendMessage}) => {
+const ChatInput = ({ data, setData = () => {}, handleSendMessage }) => {
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [content, setContent] = useState('');
@@ -47,12 +47,14 @@ const ChatInput = ({data, setData, handleSendMessage}) => {
           }
         />
       </div>
+
       <ContentEditable
         html={renderContent()}
         onChange={(e) => setContent(e.target.value)}
         tagName="div"
         id="content-edit"
       />
+
       <div className="send-message-icon" onClick={handleSendMessage}>
         <Send size={25} />
       </div>

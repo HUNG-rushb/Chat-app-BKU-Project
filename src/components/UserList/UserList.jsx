@@ -7,13 +7,21 @@ const Wrapper = styled.div`
   background-color: #ffdab9;
 `;
 
-const UserList = ({ messageData, activeMessage, setActiveMessage }) => {
+const UserList = ({
+  currentUserId,
+  userInfo,
+  messageData,
+  activeMessage,
+  setActiveMessage,
+}) => {
   return (
     <Wrapper>
-      <UserListHeader />
-      <div className='userCardList'>
+      <UserListHeader userInfo={userInfo?.userInfo} />
+
+      <div className="userCardList">
         <UserCard
-          messageData={messageData}
+          currentUserId={currentUserId}
+          userChats={userInfo?.userInfo.chatIDs}
           activeMessage={activeMessage}
           setActiveMessage={setActiveMessage}
         />
