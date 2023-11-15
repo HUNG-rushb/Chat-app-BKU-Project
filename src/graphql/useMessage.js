@@ -32,3 +32,19 @@ export const useGetAllChatMessage = (chatId) => {
     refetch,
   };
 };
+
+export const useCreateMessage = () => {
+  const [createMessage, { data, loading, error }] = useMutation(
+    CREATE_MESSAGE,
+    {
+      fetchPolicy: 'no-cache',
+    },
+  );
+
+  return {
+    createMessage,
+    isFetching: loading,
+    fetchedData: data,
+    fetchError: error,
+  };
+};

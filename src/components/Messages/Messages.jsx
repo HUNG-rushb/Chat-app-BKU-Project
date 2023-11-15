@@ -47,7 +47,11 @@ const Messages = ({ chatId, currentUserId }) => {
         </InfiniteScroll>
       </div>
 
-      <ChatInput />
+      <ChatInput
+        chatId={chatId}
+        currentUserId={currentUserId}
+        refetchMessages={refetch}
+      />
     </div>
   );
 };

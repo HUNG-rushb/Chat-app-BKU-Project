@@ -3,37 +3,73 @@ import { Send } from 'react-bootstrap-icons';
 import { CardImage } from 'react-bootstrap-icons';
 import ContentEditable from 'react-contenteditable';
 import { handleChangeFile } from '../../hooks/useChangeFile';
+import { useCreateMessage } from '../../graphql/useMessage';
+import { uploadChatImageToAWS } from '../../S3/useUploadS3';
 
-const ChatInput = ({ data, setData = () => {}, handleSendMessage }) => {
+const ChatInput = ({ chatId, currentUserId, refetchMessages }) => {
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
   const [content, setContent] = useState('');
+
+  const { createMessage } = useCreateMessage();
 
   const handleFileSelect = useCallback(() => {
     fileInputRef.current.click();
   }, []);
 
   const isImage = (str) => {
-    return str.includes('data:image/jpeg;base64');
+    return str.includes('data:image');
   };
 
   const renderContent = useCallback(() => {
     if (isImage(content)) {
-      // return `<img src="${content}" alt="Preview" style="max-width: 100%; max-height: 150px;" />`;
+      return '';
     } else {
       return content;
     }
   }, [content]);
 
-  // const handleSendMessage = useCallback(() => {
-  //   const newMessage = {
-  //     userId: 1,
-  //     message: content67`
-  //   };
-  //   data.push(newMessage);
-  //   setData(data);
-  //   setContent('');
-  // }, [data, setData, content]);
+  const handleSendMessage = useCallback(async () => {
+    if (isImage(content)) {
+      console.log({ selectedFile });
+
+      const result = await uploadChatImageToAWS(selectedFile);
+      console.log({ result });
+
+      await createMessage({
+        variables: {
+          createMessageData: {
+            userId: currentUserId,
+            chatId,
+            message: result.Location,
+            isImage: true,
+          },
+        },
+      });
+
+      setSelectedFile(null);
+      setPreviewImage(null);
+    } else {
+      if (content.trim() === '') return;
+
+      await createMessage({
+        variables: {
+          createMessageData: {
+            userId: currentUserId,
+            chatId,
+            message: content,
+            isImage: false,
+          },
+        },
+      });
+
+      setContent('');
+    }
+
+    refetchMessages();
+  }, [content]);
+
   return (
     <div className="input-message-text">
       <div className="upload-image-input">
@@ -43,14 +79,23 @@ const ChatInput = ({ data, setData = () => {}, handleSendMessage }) => {
           id="fileInput"
           ref={fileInputRef}
           onChange={(event) =>
-            handleChangeFile(event, setContent, setSelectedFile)
+            handleChangeFile(
+              event,
+              setContent,
+              setSelectedFile,
+              setPreviewImage,
+            )
           }
         />
       </div>
 
+      <img src={previewImage} alt="" />
+
       <ContentEditable
         html={renderContent()}
-        onChange={(e) => setContent(e.target.value)}
+        onChange={(e) => {
+          setContent(e.target.value);
+        }}
         tagName="div"
         id="content-edit"
       />

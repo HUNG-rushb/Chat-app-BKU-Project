@@ -45,10 +45,6 @@ const ChatApp = ({ userId }) => {
 };
 
 const MessageBox = ({ currentOtherUsers, currentUserId, chatId }) => {
-  const handleSendMessage = useCallback((item) => {
-    console.log(item);
-  });
-
   return (
     <StyledCol sm={9}>
       <BoxChat
@@ -65,7 +61,6 @@ const MessageBox = ({ currentOtherUsers, currentUserId, chatId }) => {
         )}
         currentUserId={currentUserId}
         chatId={chatId}
-        handleSendMessage={handleSendMessage}
       />
     </StyledCol>
   );
