@@ -28,7 +28,7 @@ const ChatInput = ({ data, setData = () => {}, handleSendMessage }) => {
   // const handleSendMessage = useCallback(() => {
   //   const newMessage = {
   //     userId: 1,
-  //     message: content
+  //     message: content67`
   //   };
   //   data.push(newMessage);
   //   setData(data);

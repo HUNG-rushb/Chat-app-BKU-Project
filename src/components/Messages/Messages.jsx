@@ -35,9 +35,11 @@ const Messages = ({ chatId, currentUserId }) => {
             </p>
           }
           inverse={true}
+          style={{ display: 'flex', flexDirection: 'column-reverse' }}
+          scrollableTarget="message-content"
         >
           {messages.map((item) => {
-            if (item.node.userId === currentUserId) {
+            if (item.node.userId !== currentUserId) {
               return <UserMessage key={item.node.id} item={item.node} />;
             } else
               return <UserReverseMessage key={item.node.id} item={item.node} />;
