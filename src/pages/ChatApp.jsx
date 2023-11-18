@@ -2,11 +2,13 @@ import UserList from '../components/UserList/UserList.jsx';
 import BoxChat from '../components/BoxChat/BoxChat.jsx';
 import styled from 'styled-components';
 import { Container, Row, Col } from 'react-bootstrap';
-import React, { useCallback, useState } from 'react';
-import { useGetUserInfo } from '../graphql/useUser.js';
+import React, { useCallback, useState, useEffect } from 'react';
+import { useGetUserInfo, useGetNewChatUserInfo } from '../graphql/useUser.js';
 import _ from 'lodash';
 
-const ChatApp = ({ userId }) => {
+const ChatApp = ({ userId, anotherUser }) => {
+  const [anotherUserCurrent, setAnotherUserCurrent] = useState(anotherUser);
+  // console.log({ anotherUserCurrent });
   const [activeMessage, setActiveMessage] = useState('');
   // console.log({ activeMessage });
 
@@ -15,27 +17,77 @@ const ChatApp = ({ userId }) => {
       userInfoData: { userId },
     },
     setActiveMessage,
+    anotherUserCurrent,
   );
-  console.log({ userInfo });
+
+  const { fetchedData: newChatUserInfo } = useGetNewChatUserInfo({
+    userInfoData: {
+      userId: anotherUser.isNewChat
+        ? anotherUser.anotherUser
+        : '000000000000000000000000',
+    },
+  });
+  // console.log({ newChatUserInfo });
+
+  // useEffect(() => {
+  //   if (anotherUserCurrent?.isNewChat) setActiveMessage('new');
+  // }, []);
 
   return (
     <Wrapper>
       <Container fluid>
         <Row>
           <StyledCol sm={3}>
-            <UserList
-              currentUserId={userId}
-              userInfo={userInfo}
-              activeMessage={activeMessage}
-              setActiveMessage={setActiveMessage}
-            />
+            {userInfo && (
+              <UserList
+                currentUserId={userId}
+                userInfo={userInfo}
+                userChats={
+                  anotherUserCurrent.isNewChat
+                    ? [
+                        {
+                          isNewChat: true,
+                          id: 'new',
+                          userIDs: [
+                            {
+                              ...newChatUserInfo?.userInfo,
+                            },
+                          ],
+                        },
+                        ...userInfo.userInfo.chatIDs,
+                      ]
+                    : userInfo.userInfo.chatIDs
+                }
+                activeMessage={activeMessage}
+                setActiveMessage={setActiveMessage}
+                newChatUserInfo={
+                  anotherUserCurrent.isNewChat ? newChatUserInfo : null
+                }
+              />
+            )}
           </StyledCol>
 
           {userInfo && (
             <MessageBox
-              currentOtherUsers={userInfo.userInfo.chatIDs}
+              currentOtherUser={
+                anotherUserCurrent.isNewChat
+                  ? [
+                      {
+                        isNewChat: true,
+                        id: 'new',
+                        userIDs: [
+                          {
+                            ...newChatUserInfo?.userInfo,
+                          },
+                        ],
+                      },
+                      ...userInfo.userInfo.chatIDs,
+                    ]
+                  : userInfo.userInfo.chatIDs
+              }
               currentUserId={userId}
               chatId={activeMessage}
+              setAnotherUserCurrent={setAnotherUserCurrent}
             />
           )}
         </Row>
@@ -44,12 +96,19 @@ const ChatApp = ({ userId }) => {
   );
 };
 
-const MessageBox = ({ currentOtherUsers, currentUserId, chatId }) => {
+const MessageBox = ({
+  currentOtherUser,
+  currentUserId,
+  chatId,
+  setAnotherUserCurrent,
+}) => {
+  // console.log({ currentOtherUser }, 'Message');
+
   return (
     <StyledCol sm={9}>
       <BoxChat
         currentOtherUser={_.find(
-          currentOtherUsers.map((chat) => ({
+          currentOtherUser.map((chat) => ({
             id: chat.id,
             userIDs: _.filter(chat.userIDs, (user) => {
               return user.id !== currentUserId;
@@ -61,6 +120,7 @@ const MessageBox = ({ currentOtherUsers, currentUserId, chatId }) => {
         )}
         currentUserId={currentUserId}
         chatId={chatId}
+        setAnotherUserCurrent={setAnotherUserCurrent}
       />
     </StyledCol>
   );
@@ -77,230 +137,3 @@ const Wrapper = styled.div`
 const StyledCol = styled(Col)`
   margin: 0;
 `;
-
-// const [messageData, setMessageData] = useState([
-//   {
-//     id: 1,
-//     name: 'User 0',
-//     image:
-//       'https://images.pexels.com/photos/17481292/pexels-photo-17481292.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
-//     time: '1 day ago',
-//     messages: [
-//       {
-//         userId: 1,
-//         message: 'Hello',
-//       },
-//       {
-//         userId: 2,
-//         message: 'Hi',
-//       },
-//       {
-//         userId: 2,
-//         message: 'How are you?',
-//       },
-//       {
-//         userId: 1,
-//         message: 'Im fine, thank you.',
-//       },
-//       {
-//         userId: 1,
-//         message: 'And you?',
-//       },
-//       {
-//         userId: 1,
-//         message:
-//           'Hello. this is something in the test for the message with too long in length.Hello. this is something in the test for the message with too long in length.Hello. this is something in the test for the message with too long in length.Hello. this is something in the test for the message with too long in length.Hello. this is something in the test for the message with too long in length.Hello. this is something in the test for the message with too long in length.Hello. this is something in the test for the message with too long in length.Hello. this is something in the test for the message with too long in length.',
-//       },
-//       {
-//         userId: 2,
-//         message:
-//           'Hello. this is something in the test for the message with too long in length.Hello. this is something in the test for the message with too long in length.Hello. this is something in the test for the message with too long in length.Hello. this is something in the test for the message with too long in length.Hello. this is something in the test for the message with too long in length.Hello. this is something in the test for the message with too long in length.Hello. this is something in the test for the message with too long in length.Hello. this is something in the test for the message with too long in length.',
-//       },
-//     ],
-//   },
-//   {
-//     id: 2,
-//     name: 'User 1',
-//     image:
-//       'https://images.pexels.com/photos/5257587/pexels-photo-5257587.jpeg?auto=compress&cs=tinysrgb&w=600',
-//     time: '1 day ago',
-//     messages: [
-//       {
-//         userId: 2,
-//         message: 'Hello',
-//       },
-//       {
-//         userId: 1,
-//         message: 'Hi',
-//       },
-//       {
-//         userId: 1,
-//         message: 'How are you?',
-//       },
-//       {
-//         userId: 2,
-//         message: 'Im fine, thank you.',
-//       },
-//       {
-//         userId: 2,
-//         message: 'And you?',
-//       },
-//     ],
-//   },
-//   {
-//     id: 3,
-//     name: 'User 2',
-//     image:
-//       'https://images.pexels.com/photos/4056462/pexels-photo-4056462.jpeg?auto=compress&cs=tinysrgb&w=600',
-//     time: '1 day ago',
-//     messages: [
-//       {
-//         userId: 1,
-//         message: 'Hi',
-//       },
-//       {
-//         userId: 2,
-//         message:
-//           'Hello. this is something in the test for the message with too long in length.',
-//       },
-//     ],
-//   },
-//   {
-//     id: 4,
-//     name: 'User 3',
-//     image:
-//       'https://images.pexels.com/photos/3104709/pexels-photo-3104709.jpeg?auto=compress&cs=tinysrgb&w=600',
-//     time: '1 day ago',
-//     messages: [
-//       {
-//         userId: 1,
-//         message: 'Hello',
-//       },
-//       {
-//         userId: 2,
-//         message: 'Hello.',
-//       },
-//       {
-//         userId: 2,
-//         message: 'Can i help you?',
-//       },
-//     ],
-//   },
-//   {
-//     id: 5,
-//     name: 'User 4',
-//     image:
-//       'https://images.pexels.com/photos/3196887/pexels-photo-3196887.jpeg?auto=compress&cs=tinysrgb&w=600',
-//     time: '1 day ago',
-//     messages: [
-//       {
-//         userId: 1,
-//         message: 'Say something with your new friend',
-//       },
-//       {
-//         userId: 2,
-//         message: 'Hello. My name is something',
-//       },
-//       {
-//         userId: 2,
-//         message: 'Where do you live?',
-//       },
-//       {
-//         userId: 1,
-//         message: 'Im fine, thank you.',
-//       },
-//       {
-//         userId: 1,
-//         message: 'And you?',
-//       },
-//     ],
-//   },
-//   {
-//     id: 6,
-//     name: 'User 5',
-//     image:
-//       'https://images.pexels.com/photos/5122188/pexels-photo-5122188.jpeg?auto=compress&cs=tinysrgb&w=600',
-//     time: '1 day ago',
-//     messages: [
-//       {
-//         userId: 1,
-//         message: 'Hello',
-//       },
-//     ],
-//   },
-//   {
-//     id: 7,
-//     name: 'User 6',
-//     image:
-//       'https://images.pexels.com/photos/5255202/pexels-photo-5255202.jpeg?auto=compress&cs=tinysrgb&w=600',
-//     time: '1 day ago',
-//     messages: [
-//       {
-//         userId: 1,
-//         message: 'Hello',
-//       },
-//       {
-//         userId: 2,
-//         message: 'Hello',
-//       },
-//     ],
-//   },
-//   {
-//     id: 8,
-//     name: 'User 7',
-//     image:
-//       'https://images.pexels.com/photos/5122188/pexels-photo-5122188.jpeg?auto=compress&cs=tinysrgb&w=600',
-//     time: '1 day ago',
-//     messages: [
-//       {
-//         userId: 1,
-//         message: 'Hello',
-//       },
-//       {
-//         userId: 2,
-//         message: 'Hi',
-//       },
-//       {
-//         userId: 2,
-//         message: 'How are you?',
-//       },
-//       {
-//         userId: 1,
-//         message: 'Im fine, thank you.',
-//       },
-//       {
-//         userId: 1,
-//         message: 'And you?',
-//       },
-//     ],
-//   },
-//   {
-//     id: 9,
-//     name: 'User 8',
-//     image:
-//       'https://images.pexels.com/photos/5255202/pexels-photo-5255202.jpeg?auto=compress&cs=tinysrgb&w=600',
-//     time: '1 day ago',
-//     messages: [
-//       {
-//         userId: 1,
-//         message: 'Hello',
-//       },
-//       {
-//         userId: 2,
-//         message: 'Hi',
-//       },
-//       {
-//         userId: 2,
-//         message: 'How are you?',
-//       },
-//       {
-//         userId: 1,
-//         message: 'Im fine, thank you.',
-//       },
-//       {
-//         userId: 1,
-//         message: 'And you?',
-//       },
-//     ],
-//   },
-// ]);

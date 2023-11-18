@@ -5,14 +5,21 @@ import ContentEditable from 'react-contenteditable';
 import { handleChangeFile } from '../../hooks/useChangeFile';
 import { useCreateMessage } from '../../graphql/useMessage';
 import { uploadChatImageToAWS } from '../../S3/useUploadS3';
+import { useCreateChat } from '../../graphql/useChat';
 
-const ChatInput = ({ chatId, currentUserId, refetchMessages }) => {
+const ChatInput = ({
+  chatId,
+  currentUserId,
+  setAnotherUserCurrent,
+  currentOtherUser,
+}) => {
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [content, setContent] = useState('');
 
   const { createMessage } = useCreateMessage();
+  const { createChat } = useCreateChat();
 
   const handleFileSelect = useCallback(() => {
     fileInputRef.current.click();
@@ -37,37 +44,65 @@ const ChatInput = ({ chatId, currentUserId, refetchMessages }) => {
       const result = await uploadChatImageToAWS(selectedFile);
       console.log({ result });
 
-      await createMessage({
-        variables: {
-          createMessageData: {
-            userId: currentUserId,
-            chatId,
-            message: result.Location,
-            isImage: true,
+      if (chatId === 'new') {
+        await createChat({
+          variables: {
+            createChatData: {
+              userIDs: [currentUserId, currentOtherUser.id],
+              currentUserId,
+              firstMessage: result.Location,
+              isImage: true,
+            },
           },
-        },
-      });
+        });
+
+        setAnotherUserCurrent({ anotherUser: '', isNewChat: false });
+      } else
+        await createMessage({
+          variables: {
+            createMessageData: {
+              userId: currentUserId,
+              chatId,
+              message: result.Location,
+              isImage: true,
+            },
+          },
+        });
 
       setSelectedFile(null);
       setPreviewImage(null);
     } else {
       if (content.trim() === '') return;
 
-      await createMessage({
-        variables: {
-          createMessageData: {
-            userId: currentUserId,
-            chatId,
-            message: content,
-            isImage: false,
+      if (chatId === 'new') {
+        await createChat({
+          variables: {
+            createChatData: {
+              userIDs: [currentUserId, currentOtherUser.id],
+              currentUserId,
+              firstMessage: content,
+              isImage: false,
+            },
           },
-        },
-      });
+        });
+
+        setAnotherUserCurrent({ anotherUser: '', isNewChat: false });
+      } else
+        await createMessage({
+          variables: {
+            createMessageData: {
+              userId: currentUserId,
+              chatId,
+              message: content,
+              isImage: false,
+            },
+          },
+        });
 
       setContent('');
     }
 
-    refetchMessages();
+    // refetchMessages();
   }, [content]);
 
   return (

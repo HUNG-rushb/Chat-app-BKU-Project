@@ -1,5 +1,9 @@
-import { CREATE_MESSAGE, GET_ALL_CHAT_MESSAGE } from './query/Message.js';
-import { useQuery, useMutation } from '@apollo/client';
+import {
+  CREATE_MESSAGE,
+  GET_ALL_CHAT_MESSAGE,
+  CREATED_MESSAGE_SUB,
+} from './query/Message.js';
+import { useQuery, useMutation, useSubscription } from '@apollo/client';
 import { useCallback } from 'react';
 
 export const useGetAllChatMessage = (chatId) => {
@@ -12,6 +16,14 @@ export const useGetAllChatMessage = (chatId) => {
       },
     },
   );
+
+  useSubscription(CREATED_MESSAGE_SUB, {
+    variables: { chatId: chatId },
+    onData: ({ data }) => {
+      console.log(data);
+      refetch();
+    },
+  });
 
   const loadNew = useCallback(async () => {
     const a = await fetchMore({

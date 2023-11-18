@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 const UserList = ({
   currentUserId,
   userInfo,
-  messageData,
+  userChats,
   activeMessage,
   setActiveMessage,
 }) => {
@@ -21,7 +21,7 @@ const UserList = ({
       <div className="userCardList">
         <UserCard
           currentUserId={currentUserId}
-          userChats={userInfo?.userInfo.chatIDs}
+          userChats={userChats}
           activeMessage={activeMessage}
           setActiveMessage={setActiveMessage}
         />

@@ -6,10 +6,17 @@ import ChatInput from './ChatInput.jsx';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useGetAllChatMessage } from '../../graphql/useMessage';
 
-const Messages = ({ chatId, currentUserId }) => {
+const Messages = ({
+  chatId,
+  currentUserId,
+  setAnotherUserCurrent,
+  currentOtherUser,
+}) => {
   const { messages, hasNextPage, isFetching, fetchError, loadNew, refetch } =
-    useGetAllChatMessage(chatId);
-  console.log(messages);
+    useGetAllChatMessage(
+      chatId === 'new' ? '000000000000000000000000' : chatId,
+    );
+  // console.log(messages);
 
   // const scrollToBottomRef = useRef(null);
 
@@ -21,36 +28,49 @@ const Messages = ({ chatId, currentUserId }) => {
   return (
     <div className="messages-container">
       {/* <div className="message-content" ref={scrollToBottomRef}> */}
+
       <div className="message-content">
         <InfiniteScroll
-          dataLength={messages.length}
-          next={() => {
-            loadNew();
-          }}
-          hasMore={hasNextPage}
+          dataLength={chatId === 'new' ? 0 : messages.length}
+          next={
+            chatId === 'new'
+              ? () => {}
+              : () => {
+                  loadNew();
+                }
+          }
+          hasMore={chatId === 'new' ? false : hasNextPage}
           loader={<h4>Loading...</h4>}
           endMessage={
             <p style={{ textAlign: 'center' }}>
-              <b>Begin</b>
+              <b>{chatId === 'new' ? 'Start conversation' : 'Begin'}</b>
             </p>
           }
           inverse={true}
           style={{ display: 'flex', flexDirection: 'column-reverse' }}
           scrollableTarget="message-content"
         >
-          {messages.map((item) => {
-            if (item.node.userId !== currentUserId) {
-              return <UserMessage key={item.node.id} item={item.node} />;
-            } else
-              return <UserReverseMessage key={item.node.id} item={item.node} />;
-          })}
+          {chatId === 'new' ? (
+            <></>
+          ) : (
+            messages.map((item) => {
+              if (item.node.userId !== currentUserId) {
+                return <UserMessage key={item.node.id} item={item.node} />;
+              } else
+                return (
+                  <UserReverseMessage key={item.node.id} item={item.node} />
+                );
+            })
+          )}
         </InfiniteScroll>
       </div>
 
       <ChatInput
         chatId={chatId}
         currentUserId={currentUserId}
-        refetchMessages={refetch}
+        newChat={!messages.length}
+        setAnotherUserCurrent={setAnotherUserCurrent}
+        currentOtherUser={currentOtherUser}
       />
     </div>
   );

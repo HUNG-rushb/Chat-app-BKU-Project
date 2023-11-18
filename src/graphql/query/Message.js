@@ -44,3 +44,19 @@ export const GET_ALL_CHAT_MESSAGE = gql`
     }
   }
 `;
+
+export const CREATED_MESSAGE_SUB = gql`
+  subscription CreatedMessageSubcription($chatId: String) {
+    createdMessage(chatId: $chatId) {
+      chatId {
+        id
+      }
+      # isImage
+      # message
+      userId {
+        name
+      }
+      # createdAt
+    }
+  }
+`;

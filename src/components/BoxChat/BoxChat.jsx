@@ -4,15 +4,29 @@ import BoxChatHeader from './BoxChatHeader.jsx';
 import Messages from '../Messages/Messages.jsx';
 import './BoxChat.css';
 
-const BoxChat = ({ currentOtherUser, chatId, currentUserId }) => {
-  console.log({ currentOtherUser });
+const BoxChat = ({
+  currentOtherUser,
+  chatId,
+  currentUserId,
+  setAnotherUserCurrent,
+}) => {
   return (
     <div className="box-chat">
-      <BoxChatHeader currentOtherUser={currentOtherUser.userIDs[0]} />
+      {currentOtherUser && (
+        <>
+          <BoxChatHeader currentOtherUser={currentOtherUser.userIDs[0]} />
 
-      <div>
-        <Messages chatId={chatId} currentUserId={currentUserId} />
-      </div>
+          <div>
+            <Messages
+              chatId={chatId}
+              currentUserId={currentUserId}
+              newChatUserInfo={null}
+              setAnotherUserCurrent={setAnotherUserCurrent}
+              currentOtherUser={currentOtherUser.userIDs[0]}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };

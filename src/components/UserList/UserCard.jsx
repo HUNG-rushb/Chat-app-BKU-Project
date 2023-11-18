@@ -10,6 +10,7 @@ const UserCard = ({
   setActiveMessage,
 }) => {
   // console.log({ userChats });
+  // console.log({ newChatUserInfo }, 'in user card');
 
   userChats = userChats.map((chat) => ({
     id: chat.id,
