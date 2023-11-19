@@ -7,8 +7,12 @@ import { useGetUserInfo, useGetNewChatUserInfo } from '../graphql/useUser.js';
 import _ from 'lodash';
 
 const ChatApp = ({ userId, anotherUser }) => {
+  console.log({ anotherUser }, 'in chat App 2');
   const [anotherUserCurrent, setAnotherUserCurrent] = useState(anotherUser);
-  // console.log({ anotherUserCurrent });
+  // const [anotherUserCurrent, setAnotherUserCurrent] = useState(
+  //   anotherUser.isNewChat ? anotherUser : { anotherUser: '', isNewChat: false },
+  // );
+  console.log({ anotherUserCurrent }, 'in chat App 3');
   const [activeMessage, setActiveMessage] = useState('');
   // console.log({ activeMessage });
 

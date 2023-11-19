@@ -27,7 +27,7 @@ module.exports = {
       },
     ],
     open: true,
-    port: 6110,
+    port: 6120,
     historyApiFallback: true,
   },
   plugins: [
@@ -108,18 +108,21 @@ module.exports = {
       },
     ],
   },
-  optimization: {
-    splitChunks: {
-      chunks: 'async',
-    },
-    // minimize: true,
-    // // moduleIds: true,
-    // // chunkIds: true,
-    // removeAvailableModules: true,
-    // flagIncludedChunks: true,
-    // // occurrenceOrder: false,
-    // usedExports: true,
-    // concatenateModules: true,
-    // sideEffects: false,
-  },
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: 'async',
+  //   },
+
+  //   // runtimeChunk: false,
+
+  //   // minimize: true,
+  //   // // moduleIds: true,
+  //   // // chunkIds: true,
+  //   // removeAvailableModules: true,
+  //   // flagIncludedChunks: true,
+  //   // // occurrenceOrder: false,
+  //   // usedExports: true,
+  //   // concatenateModules: true,
+  //   // sideEffects: false,
+  // },
 };
