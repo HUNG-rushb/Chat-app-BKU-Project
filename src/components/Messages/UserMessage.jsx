@@ -11,7 +11,7 @@ const UserMessage = ({ item }) => {
           item.message
         )}
       </span>
-      {unixToDateTime(item.createdAt)}
+      {/* {unixToDateTime(item.createdAt)} */}
     </div>
   );
 };

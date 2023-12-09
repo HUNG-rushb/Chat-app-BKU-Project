@@ -9,7 +9,7 @@ const UserReverseMessage = ({ item }) => {
       ) : (
         item.message
       )}
-      {unixToDateTime(item.createdAt)}
+      {/* {unixToDateTime(item.createdAt)} */}
     </div>
   );
 };
