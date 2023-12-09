@@ -2,17 +2,17 @@ import UserList from '../components/UserList/UserList.jsx';
 import BoxChat from '../components/BoxChat/BoxChat.jsx';
 import styled from 'styled-components';
 import { Container, Row, Col } from 'react-bootstrap';
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useGetUserInfo, useGetNewChatUserInfo } from '../graphql/useUser.js';
 import _ from 'lodash';
 
 const ChatApp = ({ userId, anotherUser }) => {
-  console.log({ anotherUser }, 'in chat App 2');
+  // console.log({ anotherUser }, 'in chat App 2');
   const [anotherUserCurrent, setAnotherUserCurrent] = useState(anotherUser);
   // const [anotherUserCurrent, setAnotherUserCurrent] = useState(
   //   anotherUser.isNewChat ? anotherUser : { anotherUser: '', isNewChat: false },
   // );
-  console.log({ anotherUserCurrent }, 'in chat App 3');
+  // console.log({ anotherUserCurrent }, 'in chat App 3');
   const [activeMessage, setActiveMessage] = useState('');
   // console.log({ activeMessage });
 
