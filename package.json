@@ -43,7 +43,7 @@
       },
       "scripts": {
             "start": "set PORT=3001&& react-scripts start",
-            "dev": "set PORT=3001 BROWSER=none&& react-scripts start",
+            "dev": "set PORT=3001 BROWSER=none && react-scripts start",
             "eject": "react-scripts eject",
             "webpack_build": "webpack build --config webpack.config.cjs --stats-children",
             "serve": "webpack serve --mode development",
