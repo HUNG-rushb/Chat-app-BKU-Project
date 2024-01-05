@@ -16,15 +16,14 @@ import { getMainDefinition } from '@apollo/client/utilities';
 
 const wsLink = new GraphQLWsLink(
   createClient({
-    url: 'ws://localhost:4000',
-    // connectionParams: async () => ({
-    //   test: 'test',
-    // }),
+    // url: 'ws://localhost:4000',
+    url: 'ws://ec2-54-151-220-231.ap-southeast-1.compute.amazonaws.com',
   }),
 );
 
 const httpLink = new HttpLink({
-  uri: `http://localhost:4000/dev`,
+  // uri: `http://localhost:4000/dev`,
+  uri: ` http://ec2-54-151-220-231.ap-southeast-1.compute.amazonaws.com`,
 });
 
 const link =
@@ -44,6 +43,13 @@ const link =
 
 const client = new ApolloClient({
   link,
+  headers: {
+    'Content-Type': 'application/json',
+    'apollo-require-preflight': true,
+    'Access-Control-Allow-Origin':
+      'https://roxqm2ljb8.execute-api.ap-southeast-1.amazonaws.com/',
+    'Access-Control-Allow-Credentials': true,
+  },
   cache: new InMemoryCache({
     typePolicies: {
       Query: {
@@ -53,11 +59,6 @@ const client = new ApolloClient({
       },
     },
   }),
-  // !This is live hosted server
-  // uri: 'https://social-image-api.link',
-  // ! This is a local server
-  // ! Use this URL when developing
-  // uri: 'http://localhost:4000/dev/',
 });
 
 ReactDOM.createRoot(document.getElementById('root')).render(

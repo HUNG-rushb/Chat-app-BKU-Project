@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import './Messages.css';
 import UserMessage from './UserMessage.jsx';
 import UserReverseMessage from './UserReverseMessage.jsx';
@@ -31,6 +31,7 @@ const Messages = ({
 
       <div className="message-content">
         <InfiniteScroll
+          height={550}
           dataLength={chatId === 'new' ? 0 : messages.length}
           next={
             chatId === 'new'
