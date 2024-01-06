@@ -114,54 +114,15 @@ const ChatInput = ({
     setAnotherUserCurrent,
   ]);
 
-  const handleKeyPress = async (event, chatID, chat) => {
-    // const chatMessage = document?.getElementById(`chat-${chatID}`);
-    // const { selectionStart, selectionEnd } = chatMessage;
-    // const value = chatMessage?.value;
-    console.log(chat)
-
-    if (chat && event?.key === 'Enter' && !event?.shiftKey) {
-      console.log('enter')
-      event?.preventDefault();
-    } 
-    // else if (event?.key === 'Enter' && event?.shiftKey) {
-    //   event?.preventDefault();
-    //   const newValue =
-    //     value.substring(0, selectionStart) +
-    //     '\n' +
-    //     value.substring(selectionEnd);
-    //   chatMessage.value = newValue;
-
-    //   chatMessage.style.height = 'auto';
-    //   chatMessage.style.height = chatMessage?.scrollHeight + 'px';
-
-    //   chatMessage.selectionStart = selectionStart + 1;
-    //   chatMessage.selectionEnd = selectionStart + 1;
-    // } else if (
-    //   event.key === 'Backspace' &&
-    //   selectionStart === selectionEnd &&
-    //   selectionStart > 0
-    // ) {
-    //   event.preventDefault();
-    //   const newValue =
-    //     value.substring(0, selectionStart - 1) + value.substring(selectionEnd);
-    //   chatMessage.value = newValue;
-
-    //   chatMessage.style.height = 'auto';
-    //   chatMessage.style.height = chatMessage.scrollHeight + 'px';
-
-    //   chatMessage.selectionStart = selectionStart - 1;
-    //   chatMessage.selectionEnd = selectionStart - 1;
-    // }
-  };
-
-  const handleChangeMessage = (event) => {
-    console.log(event?.key);
-    setContent(event.target.value);
-    if(event?.key==='Enter'){
-      console.log('enter')
-    }
-  }
+  const handleKeyPress = useCallback(
+    async (event) => {
+      if (event?.key === 'Enter') {
+        event.preventDefault();
+        handleSendMessage();
+      }
+    },
+    [handleSendMessage],
+  );
 
   return useMemo(
     () => (
@@ -190,12 +151,7 @@ const ChatInput = ({
         ) : (
           <ContentEditable
             html={renderContent()}
-            onChange={(e) => {
-              handleChangeMessage(e)
-            }}
-            onKeyDown={(event) =>
-              handleKeyPress(event, chatId, content, handleSendMessage)
-            }
+            onKeyPress={(event) => handleKeyPress(event)}
             tagName="div"
             id="content-edit"
           />
@@ -207,9 +163,8 @@ const ChatInput = ({
       </div>
     ),
     [
-      chatId,
-      content,
       handleFileSelect,
+      handleKeyPress,
       handleSendMessage,
       previewImage,
       renderContent,
