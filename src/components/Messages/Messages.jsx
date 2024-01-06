@@ -55,7 +55,7 @@ const Messages = ({
             <></>
           ) : (
             messages.map((item) => {
-              if (item.node.userId !== currentUserId) {
+              if (item.node.userId.id === currentUserId) {
                 return <UserMessage key={item.node.id} item={item.node} />;
               } else
                 return (
