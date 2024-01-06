@@ -4,13 +4,14 @@
   border: 1px solid #ffdab9;
   position: relative;
   justify-content: space-between;
+  border-radius: 5px;
 }
 
 .message-content {
   display: flex;
   flex-direction: column-reverse;
   overflow-y: scroll;
-  height: 510px;
+  height: calc(100vh - 270px);
   margin-bottom: 10px;
 }
 
@@ -66,7 +67,7 @@
   gap: 10px;
   align-items: center;
   max-width: 1060px;
-  align-self: flex-end;
+  position: relative;
 }
 
 #content-edit {
@@ -77,6 +78,18 @@
   width: 90%;
   padding: 5px;
   outline: none;
+}
+
+#content-with-image {
+  border: 1px solid black;
+  border-radius: 10px;
+  min-height: 38px;
+  height: 100%;
+  width: 90%;
+  padding: 5px;
+  outline: none;
+  bottom: 0;
+  right: 0;
 }
 
 .upload-image-input {

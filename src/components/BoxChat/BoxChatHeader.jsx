@@ -17,7 +17,7 @@ const BoxChatHeader = ({ currentOtherUser }) => {
             />
 
             <div className="box-chat-header-name-and-status">
-              <span id="box-chat-header-name">{currentOtherUser.name}</span>
+              <span id="box-chat-header-name">{String(currentOtherUser.name).toUpperCase()}</span>
             </div>
           </div>
         )}

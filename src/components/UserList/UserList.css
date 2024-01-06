@@ -2,6 +2,8 @@
   width: 100%;
   background-color: #f8ad9d;
   display: flex;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 }
 
 #user-list-header-avatar {
@@ -22,16 +24,18 @@
   font-size: 20px;
   font-weight: 500;
   font-family: Abhaya Libre;
+  color: #fff;
 }
 
 .user-card-container-inActive {
   margin: 10px 0;
-  background-color: #ffdab9;
+  background-color: #fff;
   border-radius: 10px;
   display: flex;
   border: 2px solid #f8ad9d;
   margin: 10px;
   cursor: pointer;
+  color: #f8ad9d;
 }
 
 .user-card-container-active {
@@ -39,13 +43,15 @@
   background-color: #f8ad9d;
   border-radius: 10px;
   display: flex;
-  border: 2px solid #ffdab9;
+  border: 2px solid #fff;
   margin: 10px;
   cursor: pointer;
+  color: white;
 }
 
 .user-card-container-inActive:hover {
   background-color: #f8ad9d;
+  color: white;
 }
 
 #user-cart-avatar {
@@ -63,12 +69,12 @@
 }
 
 #user-card-name {
-  font-weight: 600;
-  font-size: 16px;
+  font-size: 18px;
+  font-family: Abhaya Libre;
 }
 
 .userCardList {
-  height: 590px;
+  height: 550px;
   overflow-y: scroll;
 }
 

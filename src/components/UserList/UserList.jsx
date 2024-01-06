@@ -4,7 +4,8 @@ import UserListHeader from './UserListHeader.jsx';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  background-color: #ffdab9;
+  background: linear-gradient(45deg, #ffdab9, #fff);
+  border-radius: 5px;
 `;
 
 const UserList = ({

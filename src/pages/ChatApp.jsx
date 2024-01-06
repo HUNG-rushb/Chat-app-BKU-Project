@@ -38,7 +38,7 @@ const ChatApp = ({ userId, anotherUser }) => {
   // }, []);
 
   return (
-    <Wrapper>
+    <Wrapper style={{padding:"10px 2.5vh 0px"}}>
       <Container fluid>
         <Row>
           <StyledCol sm={3}>

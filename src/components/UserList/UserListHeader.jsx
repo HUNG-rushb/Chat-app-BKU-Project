@@ -10,7 +10,7 @@ const UserListHeader = ({ userInfo }) => {
         alt=""
       />
       <div className="user-list-header-title">
-        <span id="chats-title">{userInfo?.name}</span>
+        <span id="chats-title">{String(userInfo?.name).toUpperCase()}</span>
       </div>
     </div>
   );

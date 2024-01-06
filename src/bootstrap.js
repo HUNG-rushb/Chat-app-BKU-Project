@@ -17,13 +17,13 @@ import { getMainDefinition } from '@apollo/client/utilities';
 const wsLink = new GraphQLWsLink(
   createClient({
     // url: 'ws://localhost:4000',
-    url: 'ws://ec2-54-151-220-231.ap-southeast-1.compute.amazonaws.com',
+    url: 'ws://ec2-47-129-9-77.ap-southeast-1.compute.amazonaws.com/',
   }),
 );
 
 const httpLink = new HttpLink({
-  // uri: `http://localhost:4000/dev`,
-  uri: ` http://ec2-54-151-220-231.ap-southeast-1.compute.amazonaws.com`,
+  // uri: http://localhost:4000/dev,
+  uri:  'http://ec2-47-129-9-77.ap-southeast-1.compute.amazonaws.com/',
 });
 
 const link =

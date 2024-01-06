@@ -3,6 +3,7 @@
   padding-bottom: 5px;
   display: flex;
   justify-content: space-between;
+  border-radius: 5px;
 }
 
 .box-chat-header-left-content {
@@ -18,7 +19,6 @@
 }
 
 .box-chat-header-right-content:hover {
-    color: #e00;
     background-color: #ffdab9;
     border-radius: 50%;
 }
@@ -34,7 +34,8 @@
 .box-chat-header-name-and-status {
     display: flex;
     align-items: center;
-    justify-content: center;
+    color: #fff;
+    font-family: 'Abhaya Libre';
 }
 
 #box-chat-header-name {
