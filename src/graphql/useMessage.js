@@ -20,18 +20,18 @@ export const useGetAllChatMessage = (chatId) => {
   useSubscription(CREATED_MESSAGE_SUB, {
     variables: { chatId: chatId },
     onData: ({ data }) => {
-      console.log(data);
+      // console.log(data);
       refetch();
     },
   });
 
   const loadNew = useCallback(async () => {
-    const a = await fetchMore({
+    await fetchMore({
       variables: {
         after: data.getChatMessage.pageInfo.endCursor,
       },
     });
-    console.log({ a });
+    // console.log({ a });
   }, [data]);
 
   return {

@@ -42,8 +42,8 @@
             "webpack-dev-server": "^4.7.4"
       },
       "scripts": {
-            "start": "set PORT=3001&& react-scripts start",
-            "dev": "set PORT=3001 BROWSER=none && react-scripts start",
+            "start": "set PORT=3001 && react-scripts start",
+            "dev": "set PORT=3001 && set BROWSER=none && react-scripts start",
             "eject": "react-scripts eject",
             "webpack_build": "webpack build --config webpack.config.cjs --stats-children",
             "serve": "webpack serve --mode development",

@@ -1,11 +1,6 @@
 import { GET_USER_INFO, GET_NEW_CHAT_USER_INFO } from './query/User.js';
 import { UPDATE_CHAT_SUB } from './query/Chat.js';
-import {
-  useQuery,
-  useLazyQuery,
-  useMutation,
-  useSubscription,
-} from '@apollo/client';
+import { useQuery, useSubscription } from '@apollo/client';
 
 export const useGetUserInfo = (
   queryPayload,
