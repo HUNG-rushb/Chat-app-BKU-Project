@@ -17,7 +17,7 @@ import { getMainDefinition } from '@apollo/client/utilities';
 const wsLink = new GraphQLWsLink(
   createClient({
     // url: 'wss://localhost:4000',
-    url: 'wss://ec2-47-129-9-77.ap-southeast-1.compute.amazonaws.com',
+    url: 'ws://ec2-47-129-9-77.ap-southeast-1.compute.amazonaws.com',
   }),
 );
 
