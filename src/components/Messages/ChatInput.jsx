@@ -26,7 +26,7 @@ const ChatInput = ({
   }, []);
 
   const isImage = (str) => {
-    return str.includes('data:image');
+    return str?.includes('data:image');
   };
 
   const renderContent = useCallback(() => {
@@ -39,10 +39,10 @@ const ChatInput = ({
 
   const handleSendMessage = useCallback(async () => {
     if (isImage(content)) {
-      console.log({ selectedFile });
+      // console.log({ selectedFile });
 
       const result = await uploadChatImageToAWS(selectedFile);
-      console.log({ result });
+      // console.log({ result });
 
       if (chatId === 'new') {
         await createChat({
@@ -72,7 +72,10 @@ const ChatInput = ({
       setSelectedFile(null);
       setPreviewImage(null);
     } else {
-      if (content.trim() === '') return;
+      if (content.trim() === '') {
+        // console.log(12);
+        return;
+      }
 
       if (chatId === 'new') {
         await createChat({
@@ -87,7 +90,8 @@ const ChatInput = ({
         });
 
         setAnotherUserCurrent({ anotherUser: '', isNewChat: false });
-      } else
+      } else {
+        // console.log(13);
         await createMessage({
           variables: {
             createMessageData: {
@@ -98,6 +102,7 @@ const ChatInput = ({
             },
           },
         });
+      }
 
       setContent('');
     }
@@ -114,15 +119,9 @@ const ChatInput = ({
     setAnotherUserCurrent,
   ]);
 
-  const handleKeyPress = useCallback(
-    async (event) => {
-      if (event?.key === 'Enter') {
-        event.preventDefault();
-        handleSendMessage();
-      }
-    },
-    [handleSendMessage],
-  );
+  const handleKeyPress = useCallback(async () => {
+    handleSendMessage();
+  }, [handleSendMessage]);
 
   return useMemo(
     () => (
@@ -151,7 +150,14 @@ const ChatInput = ({
         ) : (
           <ContentEditable
             html={renderContent()}
-            onKeyPress={(event) => handleKeyPress(event)}
+            // onKeyDown={(event) => {
+            //   if (event?.key === 'Enter') {
+            //     handleKeyPress();
+            //   }
+            // }}
+            onChange={(e) => {
+              setContent(e.target.value);
+            }}
             tagName="div"
             id="content-edit"
           />
