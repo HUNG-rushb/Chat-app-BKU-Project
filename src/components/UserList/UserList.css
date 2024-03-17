@@ -1,0 +1,83 @@
+.user-list-header-container {
+  width: 100%;
+  background-color: #f8ad9d;
+  display: flex;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+#user-list-header-avatar {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 10px;
+}
+
+.user-list-header-title {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+#chats-title {
+  font-size: 20px;
+  font-weight: 500;
+  font-family: Abhaya Libre;
+  color: #fff;
+}
+
+.user-card-container-inActive {
+  margin: 10px 0;
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex;
+  border: 2px solid #f8ad9d;
+  margin: 10px;
+  cursor: pointer;
+  color: #f8ad9d;
+}
+
+.user-card-container-active {
+  margin: 10px 0;
+  background-color: #f8ad9d;
+  border-radius: 10px;
+  display: flex;
+  border: 2px solid #fff;
+  margin: 10px;
+  cursor: pointer;
+  color: white;
+}
+
+.user-card-container-inActive:hover {
+  background-color: #f8ad9d;
+  color: white;
+}
+
+#user-cart-avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 10px;
+}
+
+.name-and-time {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#user-card-name {
+  font-size: 18px;
+  font-family: Abhaya Libre;
+}
+
+.userCardList {
+  height: 550px;
+  overflow-y: scroll;
+}
+
+.userCardList::-webkit-scrollbar {
+  display: none;
+}

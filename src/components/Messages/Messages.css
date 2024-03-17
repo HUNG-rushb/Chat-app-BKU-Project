@@ -1,0 +1,107 @@
+.messages-container {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ffdab9;
+  position: relative;
+  justify-content: space-between;
+  border-radius: 5px;
+}
+
+.message-content {
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y: scroll;
+  height: calc(100vh - 270px);
+  margin-bottom: 10px;
+}
+
+.message-content::-webkit-scrollbar {
+  display: none;
+}
+
+.send-message-icon {
+  background-color: #fff;
+  cursor: pointer;
+  opacity: 1;
+  padding: 4px 6px;
+  border-radius: 5px;
+}
+
+.send-message-icon:hover {
+  opacity: 0.7;
+}
+
+.user-message {
+  background-color: #f8ad9d;
+  align-self: flex-end;
+  padding: 5px 10px;
+  margin: 2px;
+  border-radius: 10px;
+  color: white;
+  max-width: 50%;
+}
+
+.user-reverse-message {
+  background-color: #ddd;
+  padding: 5px 10px;
+  margin: 2px;
+  border-radius: 10px;
+  align-self: flex-start;
+  max-width: 50%;
+}
+
+#input-field-message {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
+  resize: none !important;
+  outline: none;
+  border: 2px solid #f8ad9d;
+  height: 35px;
+  padding: 3px 5px;
+}
+
+.input-message-text {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  max-width: 1060px;
+  position: relative;
+}
+
+#content-edit {
+  border: 1px solid black;
+  border-radius: 10px;
+  min-height: 38px;
+  height: 100%;
+  width: 90%;
+  padding: 5px;
+  outline: none;
+}
+
+#content-with-image {
+  border: 1px solid black;
+  border-radius: 10px;
+  min-height: 38px;
+  height: 100%;
+  width: 90%;
+  padding: 5px;
+  outline: none;
+  bottom: 0;
+  right: 0;
+}
+
+.upload-image-input {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.upload-image-input:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+#fileInput {
+  display: none;
+}
